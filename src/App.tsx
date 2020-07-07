@@ -9,10 +9,21 @@ interface AppState {
   todos: TodoModel[]
 }
 
+async function getTodos(): Promise<TodoModel[]> {
+  // return Promise.resolve(todos)
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos')
+  const todos: TodoModel[] = await response.json()
+  return todos
+}
+
 export class App extends React.Component<{}, AppState> {
   state = {
-    todos,
+    todos: [] as TodoModel[],
     foo: 'FOO'
+  }
+  async componentDidMount() {
+    const todos = await getTodos()
+    this.setState({ todos })
   }
   onTodoChange = (todo: TodoModel) => {
     console.log('change APP')
