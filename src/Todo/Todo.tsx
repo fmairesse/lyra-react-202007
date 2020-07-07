@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react'
 import { TodoModel } from '../model'
 import './Todo.css'
+import { withTodoChange } from '../TodoChangeHOC'
 
 interface TodoProps {
 	todo: TodoModel,
@@ -32,11 +33,11 @@ interface TodoState {
 // 		</div>
 // 	}
 // }
-export function Todo(props: TodoProps): ReactElement {
+function TodoComponent(props: TodoProps): ReactElement {
 	const t = props.todo
 	function onChange(e: React.ChangeEvent<HTMLInputElement>) {
 		const completed = e.target.checked
-		console.log('change TODO')
+		// console.log('change TODO')
 		props.onTodoChange({...t, completed})
 	}
 	return <div className={props.todo.completed ? 'completed' : 'not-completed'}>
@@ -44,3 +45,5 @@ export function Todo(props: TodoProps): ReactElement {
 		{props.todo.title}
 	</div>
 }
+
+export const Todo = withTodoChange('TODO', TodoComponent)
