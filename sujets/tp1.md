@@ -1,0 +1,3 @@
+- Créer composant TodoList qui prend en param une liste de todos
+- Créer composant TodoProgress qui prend en param une liste de todos et qui affiche le % de progression
+- Appeler ces 2 composant depuis App
